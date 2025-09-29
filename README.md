@@ -1,6 +1,6 @@
 # prosoft-tasks
 **1.The Descent**  
-ссылка на задание:
+ссылка на задание:  
 задача: Destroy the mountains before your starship collides with one of them. For that, shoot the highest mountain on your path.  
 решение:  
 [The Descent](solutions/The_Descent.cpp)  
@@ -12,7 +12,7 @@
     }  
 далее после проверки всех гор и выявления самой высокой по ней ведется огонь: cout << target << endl;  
 **2.Power of Thor - Episode 1**  
-ссылка на задание: https://www.codingame.com/ide/puzzle/power-of-thor-episode-1
+ссылка на задание: https://www.codingame.com/ide/puzzle/power-of-thor-episode-1  
 задача: Your program must allow Thor to reach the light of power.  
 решение:  
 [Power of Thor - Episode 1](solutions/Power_of_Thor_Episode_1.cpp)  
