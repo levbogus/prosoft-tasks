@@ -32,6 +32,7 @@ int main()
         cin >> x >> y >> h_speed >> v_speed >> fuel >> rotate >> power; cin.ignore();
 
         if(v_speed<-30&&power<4) power++;
+        else if(v_speed>-10&&power>0) power--;
         // 2 integers: rotate power. rotate is the desired rotation angle (should be 0 for level 1), power is the desired thrust power (0 to 4).
         cout << "0 "<< power << endl; 
     }
