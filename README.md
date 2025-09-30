@@ -1,6 +1,6 @@
 # prosoft-tasks
 **1.The Descent**  
-ссылка на задание: https://www.codingame.com/ide/puzzle/the-descent  
+[ссылка на задание](https://www.codingame.com/ide/puzzle/the-descent)  
 задача: Destroy the mountains before your starship collides with one of them. For that, shoot the highest mountain on your path.  
 решение:  
 [The Descent](solutions/The_Descent.cpp)  
@@ -12,7 +12,7 @@
     }  
 далее после проверки всех гор и выявления самой высокой по ней ведется огонь: cout << target << endl;  
 **2.Power of Thor - Episode 1**  
-ссылка на задание: https://www.codingame.com/ide/puzzle/power-of-thor-episode-1  
+[ссылка на задание](https://www.codingame.com/ide/puzzle/power-of-thor-episode-1)  
 задача: Your program must allow Thor to reach the light of power.  
 решение:  
 [Power of Thor - Episode 1](solutions/Power_of_Thor_Episode_1.cpp)  
@@ -39,7 +39,7 @@
        thor_x--;  
     }  
 **3. Temperatures**  
-ссылка на задание: https://www.codingame.com/ide/puzzle/temperatures  
+[ссылка на задание](https://www.codingame.com/ide/puzzle/temperatures)  
 задача: Write a program that prints the temperature closest to 0 among input data. If two numbers are equally close to zero, positive integer has to be considered closest to zero (for instance, if the temperatures are -5 and 5, then display 5).  
 решение:  
 [Temperatures](solutions/Temperatures.cpp)  
@@ -48,7 +48,7 @@
       if(abs(t)<abs(answer)||(t+answer==0&&t>=0)) answer = t;  
 дополнительная проверка if(n==0) answer=0; нужна для того, чтобы при отсутствии данных на входе, программа возвращала 0
 **4.Mars Lander - Episode 1**  
-ссылка на задание: https://www.codingame.com/ide/puzzle/mars-lander-episode-1  
+[ссылка на задание](https://www.codingame.com/ide/puzzle/mars-lander-episode-1)  
 задача:The goal for your program is to safely land the "Mars Lander" shuttle, the landing ship which contains the Opportunity rover. Mars Lander is guided by a program, and right now the failure rate for landing on the NASA simulator is unacceptable.  
 решение:  
 [Mars Lander - Episode 1](solutions/Mars_Lander_Episode_1.cpp)  
@@ -57,7 +57,7 @@
         if(v_speed<-32&&power<4) power++;  
         else if(v_speed>-10&&power>0) power--;  
 **5.Horse-racing Duals**  
-ссылка на задание: https://www.codingame.com/ide/puzzle/horse-racing-duals  
+[ссылка на задание](https://www.codingame.com/ide/puzzle/horse-racing-duals)  
 задача:Write a program which, using a given number of strengths, identifies the two closest strengths and shows their difference with an integer (≥ 0).  
 решение:  
 [Horse-racing Duals](solutions/Horse-racing_Duals.cpp)  
@@ -68,7 +68,7 @@
         if(horses[i]-horses[i-1]<min) min=horses[i]-horses[i-1];  
     }  
 **6.Shadows of the Knight - Episode 1**  
-ссылка на задание: https://www.codingame.com/ide/puzzle/shadows-of-the-knight-episode-1  
+[ссылка на задание](https://www.codingame.com/ide/puzzle/shadows-of-the-knight-episode-1)  
 задача: You will look for the hostages on a given building by jumping from one window to another using your grapnel gun. Your goal is to jump to the window where the hostages are located in order to disarm the bombs. Unfortunately, you have a limited number of jumps before the bombs go off...  
 решение:  
 [Shadows of the Knight - Episode 1](solutions/Shadows_of_the_Knight_Episode_1.cpp)  
@@ -95,6 +95,58 @@
         }
         // the location of the next window Batman should jump to.
         cout << x0 <<' '<< y0 << endl;
+**7.War**  
+[ссылка на задание](https://www.codingame.com/ide/puzzle/winamax-battle)  
+задача: War is a card game played between two players. Each player gets a variable number of cards of the beginning of the game: that's the player's deck. Cards are placed face down on top of each deck.  
+решение:  
+[War](solutions/War.cpp)  
+для решения задачи создаются две очереди, представляющие колоды игроков deck1 и deck2, чтобы можно было брать верхнюю карту и класть карты в конец. карты конвертируются в числовые значения для последующего сравнения и записыфваются в переменные val1 и val2.  
 
+    int cardvalue(const string& card){ //нам не нужны масти, необходимо достать только значение
+        string value = card.substr(0,card.size()-1);//последний символ - масть, не берем его
+        if(value=="J") return 11;
+        if(value=="Q") return 12;
+        if(value=="K") return 13;
+        if(value=="A") return 14;
+        else return stoi(value); //возвращаем номинал в виде целого числа из строки
+    }
+в каждом раунде верхние карты выкладываются на стол в векторы play1 и play2. если карты равны, проверяется возможность войны: если у какого-то игрока меньше 4 карт — выводится "PAT" и игра останавливается.  
+
+        while(!deck1.empty()&&!deck2.empty()){ //играем пока не опустеет одна из колод
+            vector<string> play1{deck1.front()}; //выкладываем верхнюю карту на стол из колоды
+            deck1.pop();//удаляем верхнюю карту из колоды
+            vector<string> play2{deck2.front()};
+            deck2.pop();
+            
+            bool war = 1;
+            while(war){
+                int val1 = cardvalue(play1.back()); //конвертируем карту в ее номинал 
+                int val2 = cardvalue(play2.back());
+                if(val1==val2){
+                    if(deck1.size()<=3||deck2.size()<=3) {
+                        cout <<"PAT"<<endl; 
+                        return 0; //в случае пата необходимо закончить игру
+                    }
+иначе добавляются 4 карты из которых в новой итерации последние выложенные карты открываются, таким образом на столе лежат 3 карты в закрытую и 1 в открытую для каждого игрока.  
+
+                for(int i=0;i<4;i++){
+                    play1.push_back(deck1.front()); deck1.pop(); //кладем еще по 3 карты в закрытую и в открытую для каждого игрока
+                    play2.push_back(deck2.front()); deck2.pop();
+                }
+когда одна из карт сильнее другой, карты со стола кладутся в конец колоды победителя сохраняя порядок: сначала карты первого игрока, затем второго.  
+
+                }else{
+                if(val1>val2){ //выигрыш первого игрока
+                    for(string x:play1)deck1.push(x); //кладем в колоду карты со стола. сначала карты 1 игрока, потом 2
+                    for(string x:play2)deck1.push(x);           
+раунд учитывается после завершения войны. игра продолжается до тех пор, пока одна из колод не опустеют, после чего выводится номер победителя и количество раундов.  
   
+    cout << (deck1.empty() ? 2 : 1) <<" "<< rounds << endl; 
+
+
+
+
+
+
+
 
